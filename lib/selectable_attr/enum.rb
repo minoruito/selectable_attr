@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 module SelectableAttr
 
-  class Enum
+  class AttrEnum
     include Enumerable
 
     class << self
@@ -13,7 +13,7 @@ module SelectableAttr
     def initialize(&block)
       @entries = []
       instance_eval(&block) if block_given?
-      SelectableAttr::Enum.instances << self
+      SelectableAttr::AttrEnum.instances << self
     end
 
     attr_writer :name
@@ -173,7 +173,7 @@ module SelectableAttr
 
       def ==(other)
         case other
-        when SelectableAttr::Enum::Entry
+        when SelectableAttr::AttrEnum::Entry
           self.id == other.id
         else
           false
@@ -182,7 +182,7 @@ module SelectableAttr
 
       def ===(other)
         case other
-        when SelectableAttr::Enum::Entry
+        when SelectableAttr::AttrEnum::Entry
           (self.id == other.id) && (self.key == other.key)
         else
           false
